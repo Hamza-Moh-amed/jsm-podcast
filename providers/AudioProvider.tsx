@@ -4,7 +4,7 @@ import { AudioContextType, AudioProps } from "@/types";
 import { usePathname } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-const AudioContexct = createContext<AudioContextType | undefined>(undefined);
+const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
 const AudioProvider = ({ children }: { children: React.ReactNode }) => {
   const [audio, setAudio] = useState<AudioProps | undefined>();
@@ -15,17 +15,17 @@ const AudioProvider = ({ children }: { children: React.ReactNode }) => {
   }, [pathname]);
 
   return (
-    <AudioContexct.Provider value={{ audio, setAudio }}>
+    <AudioContext.Provider value={{ audio, setAudio }}>
       {children}
-    </AudioContexct.Provider>
+    </AudioContext.Provider>
   );
 };
 
 export const useAudio = () => {
-  const context = useContext(AudioContexct);
+  const context = useContext(AudioContext);
 
   if (!context)
-    throw new Error("useAudio must be used within an audio provider");
+    throw new Error("useAudio must be used within an AudioProvider");
 
   return context;
 };
