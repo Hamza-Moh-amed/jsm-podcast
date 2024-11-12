@@ -12,32 +12,46 @@ export const geturl = mutation({
 
 export const createPodcast = mutation({
   args: {
+    //audioStorageId: v.id("_storage"),
+    audioStorageId: v.optional(v.id("_storage")),
+
+    //audioUrl: v.string(),
+    audioURL: v.optional(v.string()),
+
+    //voicePrompt: v.string(),
+    voicePrompt: v.optional(v.string()),
+
+    //audioDuration: v.number()
+    audioDuration: v.optional(v.number()),
+
     podcastTitle: v.string(),
+
     podcastDescription: v.string(),
-    audioUrl: v.string(),
+
     imageUrl: v.string(),
-    imagePrompt: v.string(),
-    voiceType: v.string(),
-    voicePrompt: v.string(),
-    views: v.number(),
-    audioDuration: v.number(),
-    audioStorageId: v.id("_storage"),
+
     imageStorageId: v.id("_storage"),
+
+    imagePrompt: v.string(),
+
+    voiceType: v.string(),
+
+    views: v.number(),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
-      throw new ConvexError("Not authenticated");
+      throw new ConvexError("User not authenticated");
     }
 
     const user = await ctx.db
       .query("users")
-      .filter((query) => query.eq(query.field("email"), identity.email))
+      .filter((q) => q.eq(q.field("email"), identity.email))
       .collect();
 
     if (user.length === 0) {
-      throw new ConvexError("user not found");
+      throw new ConvexError("User not found");
     }
 
     const podcast = await ctx.db.insert("podcasts", {
@@ -57,5 +71,92 @@ export const getAiGeneratedPodcasts = query({
     const podcasts = await ctx.db.query("podcasts").collect();
 
     return podcasts;
+  },
+});
+
+export const getPodcastById = query({
+  args: {
+    podcastId: v.id("podcasts"),
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.podcastId);
+  },
+});
+
+export const getPodcastByVoiceType = query({
+  args: {
+    podcastId: v.id("podcasts"),
+  },
+  handler: async (ctx, args) => {
+    const podcast = await ctx.db.get(args.podcastId);
+
+    return await ctx.db
+      .query("podcasts")
+      .filter((q) =>
+        q.and(
+          q.eq(q.field("voiceType"), podcast?.voiceType),
+          q.neq(q.field("_id"), args.podcastId)
+        )
+      )
+      .collect();
+  },
+});
+
+// this query will get the podcast by the search query.
+export const getPodcastBySearch = query({
+  args: {
+    search: v.string(),
+  },
+  handler: async (ctx, args) => {
+    if (args.search === "") {
+      return await ctx.db.query("podcasts").order("desc").collect();
+    }
+
+    const authorSearch = await ctx.db
+      .query("podcasts")
+      .withSearchIndex("search_author", (q) => q.search("author", args.search))
+      .take(10);
+
+    if (authorSearch.length > 0) {
+      return authorSearch;
+    }
+
+    const titleSearch = await ctx.db
+      .query("podcasts")
+      .withSearchIndex("search_title", (q) =>
+        q.search("podcastTitle", args.search)
+      )
+      .take(10);
+
+    if (titleSearch.length > 0) {
+      return titleSearch;
+    }
+
+    return await ctx.db
+      .query("podcasts")
+      .withSearchIndex("search_body", (q) =>
+        q.search("podcastDescription" || "podcastTitle", args.search)
+      )
+      .take(10);
+  },
+});
+
+// this mutation will delete the podcast.
+export const deletePodcast = mutation({
+  args: {
+    podcastId: v.id("podcasts"),
+    imageStorageId: v.id("_storage"),
+    audioStorageId: v.id("_storage"),
+  },
+  handler: async (ctx, args) => {
+    const podcast = await ctx.db.get(args.podcastId);
+
+    if (!podcast) {
+      throw new ConvexError("Podcast not found");
+    }
+
+    await ctx.storage.delete(args.imageStorageId);
+    await ctx.storage.delete(args.audioStorageId);
+    return await ctx.db.delete(args.podcastId);
   },
 });

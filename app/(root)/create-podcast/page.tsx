@@ -76,25 +76,27 @@ const CreatePodcast = () => {
   async function onSubmit(data: z.infer<typeof formSchema>) {
     try {
       setIsSubmitting(true);
-      if (!audioUrl || !imageUrl || !voiceType) {
+      {
+        /** if (!audioUrl || !imageUrl || !voiceType) {
         toast({
           title: "Please generate audio and image",
         });
         setIsSubmitting(false);
         throw new Error("Please generate audio and image");
+      }  */
       }
 
       const podcast = await createPodcast({
         podcastTitle: data.podcastTitle,
         podcastDescription: data.podcastDescription,
-        audioUrl,
+        //  audioUrl,
         imageUrl,
         voiceType,
         imagePrompt,
-        voicePrompt,
+        //  voicePrompt,
         views: 0,
-        audioDuration,
-        audioStorageId: audioStorageId!,
+        //  audioDuration,
+        //  audioStorageId: audioStorageId,
         imageStorageId: imageStorageId!,
       });
       toast({ title: "Podcast created" });

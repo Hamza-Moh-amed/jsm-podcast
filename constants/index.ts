@@ -46,58 +46,58 @@ export const voiceDetails = [
 export const podcastData = [
   {
     id: 1,
-    title: "The Joe Rogan Experience",
-    description: "A long form, in-depth conversation",
-    imgURL:
+    podcastTitle: "The Joe Rogan Experience",
+    podcastDescription: "A long form, in-depth conversation",
+    imageUrl:
       "https://media.istockphoto.com/id/1665390175/photo/headphones-and-mic-at-the-radio-station.webp?s=1024x1024&w=is&k=20&c=pyP_HORU0uJkR-h6KLb5MhIBClwFSci2b6tO0ydz9kY=",
   },
   {
     id: 2,
-    title: "The Futur",
-    description: "This is how the news should sound",
-    imgURL:
+    podcastTitle: "The Futur",
+    podcastDescription: "This is how the news should sound",
+    imageUrl:
       "https://media.istockphoto.com/id/1665390175/photo/headphones-and-mic-at-the-radio-station.webp?s=1024x1024&w=is&k=20&c=pyP_HORU0uJkR-h6KLb5MhIBClwFSci2b6tO0ydz9kY=",
   },
   {
     id: 3,
-    title: "Waveform",
-    description: "Join Michelle Obama in conversation",
-    imgURL:
+    podcastTitle: "Waveform",
+    podcastDescription: "Join Michelle Obama in conversation",
+    imageUrl:
       "https://media.istockphoto.com/id/1665390175/photo/headphones-and-mic-at-the-radio-station.webp?s=1024x1024&w=is&k=20&c=pyP_HORU0uJkR-h6KLb5MhIBClwFSci2b6tO0ydz9kY=",
   },
   {
     id: 4,
-    title: "The Tech Talks Daily Podcast",
-    description: "This is how the news should sound",
-    imgURL:
+    podcastTitle: "The Tech Talks Daily Podcast",
+    podcastDescription: "This is how the news should sound",
+    imageUrl:
       "https://media.istockphoto.com/id/1665390175/photo/headphones-and-mic-at-the-radio-station.webp?s=1024x1024&w=is&k=20&c=pyP_HORU0uJkR-h6KLb5MhIBClwFSci2b6tO0ydz9kY=",
   },
   {
     id: 5,
-    title: "GaryVee Audio Experience",
-    description: "A long form, in-depth conversation",
-    imgURL:
+    podcastTitle: "GaryVee Audio Experience",
+    podcastDescription: "A long form, in-depth conversation",
+    imageUrl:
       "https://media.istockphoto.com/id/1665390175/photo/headphones-and-mic-at-the-radio-station.webp?s=1024x1024&w=is&k=20&c=pyP_HORU0uJkR-h6KLb5MhIBClwFSci2b6tO0ydz9kY=",
   },
   {
     id: 6,
-    title: "Syntax ",
-    description: "Join Michelle Obama in conversation",
-    imgURL:
+    podcastTitle: "Syntax ",
+    podcastDescription: "Join Michelle Obama in conversation",
+    imageUrl:
       "https://media.istockphoto.com/id/1665390175/photo/headphones-and-mic-at-the-radio-station.webp?s=1024x1024&w=is&k=20&c=pyP_HORU0uJkR-h6KLb5MhIBClwFSci2b6tO0ydz9kY=",
   },
   {
     id: 7,
-    title: "IMPAULSIVE",
-    description: "A long form, in-depth conversation",
-    imgURL:
+    podcastTitle: "IMPAULSIVE",
+    podcastDescription: "A long form, in-depth conversation",
+    imageUrl:
       "https://media.istockphoto.com/id/1665390175/photo/headphones-and-mic-at-the-radio-station.webp?s=1024x1024&w=is&k=20&c=pyP_HORU0uJkR-h6KLb5MhIBClwFSci2b6tO0ydz9kY=",
   },
   {
     id: 8,
-    title: "Ted Tech",
-    description: "This is how the news should sound",
-    imgURL:
+    podcastTitle: "Ted Tech",
+    podcastDescription: "This is how the news should sound",
+    imageUrl:
       "https://media.istockphoto.com/id/1665390175/photo/headphones-and-mic-at-the-radio-station.webp?s=1024x1024&w=is&k=20&c=pyP_HORU0uJkR-h6KLb5MhIBClwFSci2b6tO0ydz9kY=",
   },
 ];
