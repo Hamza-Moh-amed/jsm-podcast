@@ -6,11 +6,12 @@ import Searchbar from "@/components/Searchbar";
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
 import React from "react";
+import { use } from "react";
 
 //TODO: Searchbar, getPodcastsBySearch
 
-const Discover = ({ searchParams }: { searchParams: { search: string } }) => {
-  const { search } = React.use(searchParams);
+const Discover = ({ searchParams }: any) => {
+  const { search } = use<any>(searchParams);
   const podcastsData = useQuery(api.podcasts.getPodcastBySearch, {
     search: search || "",
   });

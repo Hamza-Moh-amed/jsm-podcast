@@ -5,17 +5,14 @@ import PodcastCard from "@/components/PodcastCard";
 import PodcastDetailPlayer from "@/components/PodcastDetailPlayer";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
+import { PodcastProps } from "@/types";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
 import Image from "next/image";
 import React from "react";
 
-const PodcastDetails = ({
-  params,
-}: {
-  params: { podcastId: Id<"podcasts"> };
-}) => {
-  const { podcastId } = React.use(params);
+const PodcastDetails = ({ params }: any) => {
+  const { podcastId } = React.use<any>(params);
   const { user } = useUser();
   const podcast = useQuery(api.podcasts.getPodcastById, {
     podcastId,
@@ -25,8 +22,6 @@ const PodcastDetails = ({
   });
 
   const isOwner = user?.id === podcast?.authorId;
-
-  console.log(user);
 
   if (!similarPodcasts || !podcast) return <LoaderSpinner />;
 

@@ -1,6 +1,7 @@
 import LeftSidebar from "@/components/LeftSidebar";
+
 import MobileNav from "@/components/MobileNav";
-import PodcastPlayer from "@/components/PodcastPlayer";
+import PodcastPlayerPlus from "@/components/PodcastPlayerPlus";
 import RightSidebar from "@/components/RightSidebar";
 import Image from "next/image";
 
@@ -24,16 +25,13 @@ export default function RootLayout({
               />
               <MobileNav />
             </div>
-            <div className="flex flex-col md:pb-14">
-              Toaster
-              {children}
-            </div>
+            <div className="flex flex-col md:pb-14">{children}</div>
           </div>
         </section>
         <RightSidebar />
       </main>
 
-      <PodcastPlayer />
+      <PodcastPlayerPlus />
     </div>
   );
 }

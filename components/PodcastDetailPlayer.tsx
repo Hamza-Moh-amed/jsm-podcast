@@ -21,10 +21,10 @@ const PodcastDetailPlayer = ({
   authorImageUrl,
   authorId,
 }: PodcastDetailPlayerProps) => {
-  const { toast } = useToast();
   const router = useRouter();
-  const [isDeleting, setIsDeleting] = useState(true);
   const { setAudio } = useAudio();
+  const { toast } = useToast();
+  const [isDeleting, setIsDeleting] = useState(false);
   const deletePodcast = useMutation(api.podcasts.deletePodcast);
 
   const handlePlay = () => {
@@ -55,7 +55,6 @@ const PodcastDetailPlayer = ({
     }
   };
 
-  console.log({ authorId });
   return (
     <div className="mt-6 flex w-full justify-between max-md:justify-center">
       <div className="flex flex-col gap-6 max-md:items-center md:flex-row">
